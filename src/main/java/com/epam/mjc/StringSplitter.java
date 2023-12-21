@@ -1,7 +1,7 @@
 package com.epam.mjc;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 
 public class StringSplitter {
@@ -14,21 +14,27 @@ public class StringSplitter {
      * @return List of substrings
      */
     public List<String> splitByDelimiters(String source, Collection<String> delimiters) {
-        List<String> splittedList = new LinkedList<>();
-        StringBuilder mWord = new StringBuilder();
-        for (int i = 0; i < source.length(); i++) {
-            if (delimiters.contains(String.valueOf(source.charAt(i)))) {
-                if (!mWord.isEmpty()) {
-                    splittedList.add(mWord.toString());
-                    mWord.setLength(0);
-                }
-            } else {
-                mWord.append(source.charAt(i));
-            }
+        List<String> result = new ArrayList<String>();
+        result.add(source);
+        String[] particles = (String[]) delimiters.toArray(new String[0]);
+        for (int i = 0; i < particles.length; i++) {
+            result = splitterUnit(result, particles[i]);
         }
-        if (!mWord.isEmpty()) {
-            splittedList.add(mWord.toString());
+        while (result.indexOf("") != -1) {
+            result.remove(result.indexOf(""));
         }
-        return splittedList;
+        if (result != null)
+            return result;
+        else
+            throw new UnsupportedOperationException("You should implement this method.");
     }
+
+    public List<String> splitterUnit(List<String> before, String delim) {
+        List<String> after = new ArrayList<>();
+        for (int i = 0; i < before.size(); i++) {
+            after.addAll(List.of(before.get(i).split(delim)));
+        }
+        return after;
+    }
+
 }

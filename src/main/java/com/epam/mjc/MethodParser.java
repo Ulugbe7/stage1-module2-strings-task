@@ -49,7 +49,7 @@ public class MethodParser {
         if (accessMod != null) {
             System.out.println(accessMod);
         }
-        if (returnType == null)
+        if (methodName == null || returnType == null)
             throw new UnsupportedOperationException("You should implement this method.");
         parsedMethod.setAccessModifier(accessMod);
         parsedMethod.setReturnType(returnType);
