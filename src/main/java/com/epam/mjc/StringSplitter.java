@@ -31,8 +31,4 @@ public class StringSplitter {
         }
         return splittedList;
     }
-
-    public static void main(String[] args) {
-        System.out.println(new StringSplitter().splitByDelimiters("qw3e1rt4yu2i3opa1sd1fg2hj4kl", List.of("1", "2", "3")));
-    }
 }
